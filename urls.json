@@ -1,0 +1,34 @@
+{
+  "urls": [
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-adult",
+      "category": "Adult Content",
+      "shouldBeBlocked": true
+    },
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-real-time-detection-command-and-control",
+      "category": "Malware - C&C",
+      "shouldBeBlocked": true
+    },
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-proxy-avoidance-and-anonymizers",
+      "category": "Proxy/Anonymizers",
+      "shouldBeBlocked": true
+    },
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-grayware",
+      "category": "Grayware",
+      "shouldBeBlocked": true
+    },
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-hacking",
+      "category": "Hacking Tools",
+      "shouldBeBlocked": true
+    },
+    {
+      "url": "https://urlfiltering.paloaltonetworks.com/test-malware",
+      "category": "Malware",
+      "shouldBeBlocked": true
+    }
+  ]
+}
