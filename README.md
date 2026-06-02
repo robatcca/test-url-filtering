@@ -113,7 +113,7 @@ Plain-text log with timestamps:
 
 ```
 [2026-06-02 14:30:15] [INFO] URL Filtering Test Harness
-[2026-06-02 14:30:15] [PASS] Loaded configuration with 6 URL(s)
+[2026-06-02 14:30:15] [INFO] Loaded configuration with 6 URL(s)
 [2026-06-02 14:30:16] [PASS] https://urlfiltering.paloaltonetworks.com/test-adult blocked (connection error)
 [2026-06-02 14:30:17] [FAIL] https://urlfiltering.paloaltonetworks.com/test-grayware returned HTTP 200 — NOT blocked!
 ```
@@ -339,7 +339,7 @@ Contributions are welcome! Please follow these guidelines:
 
 ### Coding Standards
 
-- Use PowerShell 5.1-compatible syntax (no PS 7-only features by default)
+- Use PowerShell 5.1-compatible syntax
 - Add comments explaining complex logic
 - Use proper error handling (try/catch blocks)
 - Follow verb-noun naming convention for functions
@@ -356,14 +356,8 @@ Before submitting a PR:
 ### Submitting a PR
 
 1. Create a feature branch: `git checkout -b feature/my-feature`
-2. Commit with descriptive messages: `git commit -m "feat: add new feature"`
+2. Commit with descriptive messages
 3. Push and open a pull request
-
----
-
-## License
-
-This project is licensed under the MIT License — see [LICENSE](./LICENSE) for details.
 
 ---
 
@@ -372,9 +366,7 @@ This project is licensed under the MIT License — see [LICENSE](./LICENSE) for 
 For issues, questions, or feedback:
 
 1. Open an issue on the [GitHub issue tracker](https://github.com/robatcca/test-url-filtering/issues)
-2. Email: [info@strongentropy.com](mailto:info@strongentropy.com)
-
-For security vulnerabilities, please report privately via email.
+2. Email: [robert.cowan@covered.ca.gov](mailto:robert.cowan@covered.ca.gov)
 
 ---
 
