@@ -1,6 +1,11 @@
 {
   "urls": [
     {
+      "url": "https://www.hustler.com/",
+      "category": "Adult Content",
+      "shouldBeBlocked": true
+    },
+    {
       "url": "https://urlfiltering.paloaltonetworks.com/test-adult",
       "category": "Adult Content",
       "shouldBeBlocked": true
