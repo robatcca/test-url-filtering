@@ -1,4 +1,4 @@
-.PHONY: help install install-deps test test-verbose test-custom clean report open
+.PHONY: help install install-deps test run test-verbose test-custom clean report open
 
 help:
 	@echo "URL Filtering Test Harness — available targets:"
@@ -6,7 +6,7 @@ help:
 	@echo "  install             Install all dependencies and make scripts executable"
 	@echo "  install-deps        Install runtime dependencies only (curl, jq)"
 	@echo ""
-	@echo "  test                Run URL filtering tests (cross-platform)"
+	@echo "  test, run           Run URL filtering tests (cross-platform)"
 	@echo "  test-verbose        Run tests with verbose output"
 	@echo "  test-custom         Run with custom config: make test-custom CONFIG=urls.json TIMEOUT=15"
 	@echo ""
@@ -29,7 +29,7 @@ else
 	OS := unknown
 endif
 
-# ── Installation ─────────────────────────────────────────────────────────────
+# ── Installation ──────────────────────────────────────────────────────────────
 
 install: install-deps
 	@echo "Making scripts executable..."
@@ -94,6 +94,8 @@ ifeq ($(OS),windows)
 else
 	@$(TEST_CMD) --config $(CONFIG) --timeout $(TIMEOUT)
 endif
+
+run: test
 
 test-verbose: install-deps
 	@echo "Running tests with verbose output..."
