@@ -369,7 +369,7 @@ function Generate-HTMLReport {
 <body>
     <div class="container">
         <div class="header">
-            <h1>URL Filtering Test Report</h1>
+            <h1>&#128274; URL Filtering Test Report</h1>
             <p>Web filtering compliance validation</p>
         </div>
         
@@ -398,7 +398,7 @@ function Generate-HTMLReport {
     if ($failCount -gt 0) {
         $html += @"
             <div class="warning">
-                <strong>⚠️  Warning:</strong> $failCount URL(s) were NOT blocked by the filter. These should be investigated.
+                <strong>&#x26A0;&#xFE0F;  Warning:</strong> $failCount URL(s) were NOT blocked by the filter. These should be investigated.
             </div>
 "@
     }
@@ -420,7 +420,7 @@ function Generate-HTMLReport {
     
     foreach ($result in $Results) {
         $statusClass = if ($result.Blocked) { 'blocked' } elseif ($result.Status -eq 'ERROR') { 'error' } else { 'accessible' }
-        $statusText = if ($result.Blocked) { '✓ Blocked' } elseif ($result.Status -eq 'ERROR') { '⚠ Error' } else { '✗ Accessible' }
+        $statusText = if ($result.Blocked) { '&#10003; Blocked' } elseif ($result.Status -eq 'ERROR') { '&#x26A0;&#xFE0F; Error' } else { '&#10007; Accessible' }
         $httpCode = if ($result.StatusCode) { $result.StatusCode } else { 'N/A' }
         $escapedUrl = [System.Net.WebUtility]::HtmlEncode($result.Url)
         $escapedCategory = [System.Net.WebUtility]::HtmlEncode($result.Category)
