@@ -31,14 +31,12 @@ param(
     [string]$ConfigPath = (Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath "urls.json"),
     
     [Parameter(Mandatory = $false)]
-    [int]$TimeoutSeconds = 10,
-    
-    [switch]$Verbose
+    [int]$TimeoutSeconds = 10
 )
 
 $VerbosePreference = if ($Verbose) { "Continue" } else { "SilentlyContinue" }
 
-# ── Configuration ────────────────────────────────────────────────────────────
+# -- Configuration -------------------------------------------------------
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version 3.0
@@ -47,7 +45,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $logFile = Join-Path -Path $scriptDir -ChildPath "test-results.log"
 $reportFile = Join-Path -Path $scriptDir -ChildPath "filter-report.html"
 
-# ── Helper Functions ─────────────────────────────────────────────────────────
+# -- Helper Functions ----------------------------------------------------
 
 function Write-Log {
     param(
@@ -93,7 +91,7 @@ function Test-URLAccess {
         $result.Status = "ACCESSIBLE"
         $result.Blocked = $false
         
-        Write-Log "FAIL: $Url returned HTTP $($response.StatusCode) — NOT blocked!" "FAIL"
+        Write-Log "FAIL: $Url returned HTTP $($response.StatusCode) - NOT blocked!" "FAIL"
         
     }
     catch [System.Net.WebException] {
@@ -113,11 +111,11 @@ function Test-URLAccess {
             else {
                 $result.Status = "ACCESSIBLE (HTTP $statusCode)"
                 $result.Blocked = $false
-                Write-Log "FAIL: $Url returned HTTP $statusCode — NOT blocked!" "FAIL"
+                Write-Log "FAIL: $Url returned HTTP $statusCode - NOT blocked!" "FAIL"
             }
         }
         else {
-            # Connection error, timeout, or DNS failure — likely blocked
+            # Connection error, timeout, or DNS failure - likely blocked
             $result.Status = "BLOCKED (Connection error)"
             $result.Blocked = $true
             $result.Exception = $webEx.Message
@@ -371,7 +369,7 @@ function Generate-HTMLReport {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔒 URL Filtering Test Report</h1>
+            <h1>URL Filtering Test Report</h1>
             <p>Web filtering compliance validation</p>
         </div>
         
@@ -421,14 +419,16 @@ function Generate-HTMLReport {
 "@
     
     foreach ($result in $Results) {
-        $statusClass = if ($result.Blocked) { "blocked" } elseif ($result.Status -eq "ERROR") { "error" } else { "accessible" }
-        $statusText = if ($result.Blocked) { "✓ Blocked" } elseif ($result.Status -eq "ERROR") { "⚠ Error" } else { "✗ Accessible" }
-        $httpCode = if ($result.StatusCode) { $result.StatusCode } else { "N/A" }
+        $statusClass = if ($result.Blocked) { 'blocked' } elseif ($result.Status -eq 'ERROR') { 'error' } else { 'accessible' }
+        $statusText = if ($result.Blocked) { '✓ Blocked' } elseif ($result.Status -eq 'ERROR') { '⚠ Error' } else { '✗ Accessible' }
+        $httpCode = if ($result.StatusCode) { $result.StatusCode } else { 'N/A' }
+        $escapedUrl = [System.Net.WebUtility]::HtmlEncode($result.Url)
+        $escapedCategory = [System.Net.WebUtility]::HtmlEncode($result.Category)
         
         $html += @"
                     <tr>
-                        <td class="url-cell">$([System.Net.WebUtility]::HtmlEncode($result.Url))</td>
-                        <td><span class="category-badge">$([System.Net.WebUtility]::HtmlEncode($result.Category))</span></td>
+                        <td class="url-cell">$escapedUrl</td>
+                        <td><span class="category-badge">$escapedCategory</span></td>
                         <td><span class="status-badge $statusClass">$statusText</span></td>
                         <td>$httpCode</td>
                         <td>$($result.Timestamp.Substring(0, 19))</td>
@@ -453,7 +453,7 @@ function Generate-HTMLReport {
     Write-Log "HTML report generated: $OutputPath" "INFO"
 }
 
-# ── Main ─────────────────────────────────────────────────────────────────────
+# -- Main ----------------------------------------------------------------
 
 function Main {
     Write-Log "========================================" "INFO"
