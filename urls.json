@@ -1,12 +1,14 @@
 {
   "urls": [
     {
-      "url": "https://www.hustler.com/", # known firewall block in place
+      "_comment": "Known firewall block in place",
+      "url": "https://www.hustler.com/",
       "category": "Adult Content",
       "shouldBeBlocked": true
     },
     {
-      "url": "https://www.playboy.com/", # known dns block in place
+      "_comment": "Known dns block in place",
+      "url": "https://www.playboy.com/",
       "category": "Adult Content",
       "shouldBeBlocked": true
     },
